@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
             <button name="button_draft" position="after">
-                <button name="delete_number" string="Delete Number"  attrs="{'invisible':['|', '|', ('type', 'not in', ('out_invoice', 'out_refund')), ('state','!=','cancel'),'|',('name','=',False), ('name','=','/')]}" type="object" help="Deleting the number will allow you to delete this invoice or to get a new number if you re-validate it. If this invoice represents a voided invoice, then you should not clean it." confirm="Warning! This can't be undone. Deleting the number will allow you to delete this invoice or to get a new number if you re-validate it. If this invoice represents a voided invoice, then you should not clean it. Do you want to continue?" groups="account.group_account_manager"/>
+                <button name="delete_number" string="Delete Number"  attrs="{'invisible':['|', ('state','!=','cancel'),'|',('name','=',False), ('name','=','/')]}" type="object" help="Deleting the number will allow you to delete this invoice or to get a new number if you re-validate it. If this invoice represents a voided invoice, then you should not clean it." confirm="Warning! This can't be undone. Deleting the number will allow you to delete this invoice or to get a new number if you re-validate it. If this invoice represents a voided invoice, then you should not clean it. Do you want to continue?" groups="account.group_account_manager"/>
             </button>
 
             <field name="narration" position="attributes">
@@ -16,17 +16,23 @@
                 <field name="internal_notes" placeholder="Internal notes.."/>
             </field>
 
-            <field name="date_maturity" position="attributes">
+            <xpath expr="//field[@name='line_ids']//field[@name='date_maturity']" position="attributes">
                 <attribute name="invisible"></attribute>
-            </field>
+                <attribute name="optional">hide</attribute>
+            </xpath>
 
             <!-- odoo deja modificar el origen pero si el usuario lo borra ya no lo ve mas y no se puede revertir. ademas nos parece practico que pueda completarlo para, por ej, vincular factura creada manualmente a una OV -->
             <field name="invoice_origin" position="attributes">
                 <attribute name="attrs"></attribute>
             </field>
+            <!-- idem para campo "Reversion de" (vinculo a documento original generalmente factura) -->
+            <field name="reversed_entry_id" position="attributes">
+                <attribute name="attrs"></attribute>
+            </field>
 
             <field name="currency_id" position="attributes">
                 <attribute name="readonly">True</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
 
             <field name="currency_id" position="replace">
@@ -39,6 +45,7 @@
 
             <field name="journal_id" position="attributes">
                 <attribute name="groups">account.group_account_invoice</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
         </field>
     </record>
@@ -56,17 +63,6 @@
                 <filter name="journal_id" string="Journal" context="{'group_by':'journal_id'}"/>
                 <filter name="company_id" string="Company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
             </xpath>
-        </field>
-    </record>
-
-    <record id="view_invoice_tree" model="ir.ui.view">
-        <field name="name">account.invoice.tree</field>
-        <field name="model">account.move</field>
-        <field name="inherit_id" ref="account.view_invoice_tree"/>
-        <field name="arch" type="xml">
-            <field name="invoice_origin" position="after">
-                <field name="ref" optional="hide"/>
-            </field>
         </field>
     </record>
 
