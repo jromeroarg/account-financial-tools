@@ -16,11 +16,11 @@ Account UX
 
 Several Improvements to accounting:
 
+#. Make subtotal included / excluded optional and not related to tax b2b/b2c
 #. Reconcile on company currency if account don't have a currency and country is Argentina (if any other country need this it should make a PR and add itself)
 #. If user sets and account of a liquidity type and previous type was not liquidity and not reconcilable, recompute amounts residual because they are used on liquidity accounts
 #. On invoice validation check that user hasn't delete any "automatic" tax from invoice
 #. Add reconciliations menu on accounting (only with debug mode)
-#. When creatin banks from bank menu, use bank name + account number for journal name (by default only account number is used). And also allow user to change this value (by default user can't)
 #. Add debit and credit card payment methods
 #. For inbound debit and credit payments, allow to configure days for collection. This will be used to set maturity date of related journal entries
 #. Add online payment method on journals
@@ -53,6 +53,8 @@ Several Improvements to accounting:
 #. Allow to set more than one default tax for sales/purchases, useful for multicompany but also for perceptions or similar tax applied together with vat's.
 #. Add internal notes on invoices (account.move) to be used later by sales / pickings
 #. Show the "Reversal of" field always, like the origin field, not matter if the field is set or not or the type of account.move.
+#. Add filter by vat in the partners list views.
+#. Allow to disable the hash in the journal to restrict entries deletion.
 #. This replace original odoo wizard for changing currency on an invoice with serveral improvements:
 
    * Preview and allow to change the rate thats is going to be used.
