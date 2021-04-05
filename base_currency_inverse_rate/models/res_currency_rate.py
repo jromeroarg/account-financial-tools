@@ -9,7 +9,7 @@ class ResCurrencyRate(models.Model):
     _inherit = "res.currency.rate"
 
     inverse_rate = fields.Float(
-        'Inverse Rate', digits=(12, 4),
+        'Inverse Rate', digits=(12, 6),
         compute='_compute_inverse_rate',
         inverse='_inverse_inverse_rate',
         help='The rate of the currency from the currency of rate 1',
@@ -20,7 +20,7 @@ class ResCurrencyRate(models.Model):
     # TODO this is not a good solution and we should improve it, perhups not
     # to use arg as base currency but we should change method where we get
     # rate from afip
-    rate = fields.Float(digits=(7, 9))
+    rate = fields.Float(digits=0)
 
     @api.multi
     @api.depends('rate')
