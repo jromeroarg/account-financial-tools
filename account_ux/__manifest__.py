@@ -19,7 +19,7 @@
 ##############################################################################
 {
     'name': 'Account UX',
-    'version': "13.0.1.10.0",
+    'version': "13.0.1.18.0",
     'category': 'Accounting',
     'sequence': 14,
     'summary': '',
@@ -31,7 +31,6 @@
     'depends': [
         'account',
         "payment",
-        "account_payment_group",
         "base_vat",
     ],
     'data': [
@@ -46,8 +45,8 @@
         'views/account_reconcile_views.xml',
         'views/res_partner_views.xml',
         'views/account_partial_reconcile_views.xml',
-        'views/account_account_type_views.xml',
         'views/account_account_views.xml',
+        'views/account_type_views.xml',
         'views/account_move_views.xml',
         'data/account_payment_method_data.xml',
         'data/mail_data.xml',
